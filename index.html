@@ -594,17 +594,153 @@
       .features-grid { grid-template-columns: 1fr; }
       .hero-stats { flex-direction: column; gap: 16px; }
     }
+
+    /* ════════════════════════════════════════
+       DESIGN ENHANCEMENTS
+    ════════════════════════════════════════ */
+
+    /* ── Scroll progress bar ── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; z-index: 2001;
+      height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--purple-400), var(--purple-500), #c084fc);
+      border-radius: 0 2px 2px 0;
+      pointer-events: none;
+      transition: width .08s linear;
+    }
+
+    /* ── Stagger animation system ── */
+    .anim-hidden { opacity: 0; transform: translateY(28px); }
+    @keyframes anim-enter {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim-in {
+      animation: anim-enter .55s cubic-bezier(.4,0,.2,1) calc(var(--stagger, 0) * 90ms) both;
+    }
+
+    /* ── Nav: active link underline indicator ── */
+    .nav-links a { position: relative; padding-bottom: 4px; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 2px; background: var(--purple-500); border-radius: 2px;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .28s cubic-bezier(.4,0,.2,1);
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--purple-600); }
+
+    /* ── Hero entrance animations ── */
+    @keyframes hero-enter {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow     { animation: hero-enter .6s cubic-bezier(.4,0,.2,1) .05s both; }
+    .hero-title       { animation: hero-enter .65s cubic-bezier(.4,0,.2,1) .18s both; }
+    .hero-description { animation: hero-enter .6s cubic-bezier(.4,0,.2,1) .32s both; }
+    .hero-actions     { animation: hero-enter .6s cubic-bezier(.4,0,.2,1) .44s both; }
+    .hero-stats       { animation: hero-enter .6s cubic-bezier(.4,0,.2,1) .58s both; }
+    .hero-card        { animation: hero-enter .7s cubic-bezier(.4,0,.2,1) .36s both; }
+
+    /* ── Feature icons hover ── */
+    .feature-icon { transition: transform var(--transition), background var(--transition); }
+    .feature-item:hover .feature-icon {
+      background: var(--purple-200);
+      transform: scale(1.15) rotate(-6deg);
+    }
+
+    /* ── Plan cards enhanced hover ── */
+    .plan-card { box-shadow: var(--shadow-sm); }
+    .plan-card:not(.featured):hover {
+      box-shadow: 0 20px 50px rgba(124,58,237,.16), 0 0 0 1.5px var(--purple-300);
+    }
+    /* Featured card shimmer sweep */
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .plan-card.featured::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.09) 50%, transparent 62%);
+      background-size: 200% 100%;
+      animation: shimmer 4s linear infinite;
+      pointer-events: none;
+      border-radius: inherit;
+      z-index: 0;
+    }
+    .plan-card.featured > * { position: relative; z-index: 1; }
+
+    /* ── Why cards icon hover ── */
+    .why-icon { transition: transform var(--transition), background var(--transition); }
+    .why-card:hover .why-icon {
+      background: var(--purple-200);
+      transform: scale(1.12) rotate(-6deg);
+    }
+
+    /* ── Process step circle hover ── */
+    .step-circle { transition: transform var(--transition), box-shadow var(--transition); }
+    .process-step:hover .step-circle {
+      transform: scale(1.13);
+      box-shadow: 0 8px 28px rgba(124,58,237,.55);
+    }
+
+    /* ── CTA banner subtle pattern ── */
+    .cta-banner { position: relative; overflow: hidden; }
+    .cta-banner::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-banner > * { position: relative; z-index: 1; }
+
+    /* ── WhatsApp pulse ring ── */
+    @keyframes wa-ring {
+      0%   { transform: scale(.85); opacity: .5; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+    .whatsapp-float { position: fixed; } /* ensure stacking context */
+    .whatsapp-float::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: rgba(37,211,102,.45);
+      animation: wa-ring 2.8s ease-out 1.8s infinite;
+      pointer-events: none;
+    }
+
+    /* ── Contact items hover ── */
+    .contact-item { border-radius: var(--radius-sm); transition: background var(--transition); }
+    .contact-item:hover { background: var(--purple-50); }
+    .contact-item-icon { transition: transform var(--transition), background var(--transition); }
+    .contact-item:hover .contact-item-icon {
+      background: var(--purple-200);
+      transform: scale(1.1) rotate(-4deg);
+    }
+
+    /* ── Badge subtle border ── */
+    .badge { border: 1px solid var(--purple-200); }
+
+    /* ── Extras table row transition ── */
+    .extras-table tbody tr { transition: background var(--transition); }
+
+    /* ── Respect reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-eyebrow, .hero-title, .hero-description,
+      .hero-actions, .hero-stats, .hero-card,
+      .plan-card.featured::before,
+      .whatsapp-float::before { animation: none; }
+      .anim-hidden { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
+  <div class="progress-bar" id="progressBar"></div>
 
   <!-- ═══════════════ NAVBAR ═══════════════ -->
   <nav class="navbar" id="navbar">
     <div class="container">
       <div class="nav-inner">
         <a href="#inicio" class="nav-logo">
-          <div class="nav-logo-mark">E</div>
-          <span class="nav-logo-text">Es<span>tred</span></span>
+          <img src="img/logo.png" alt="Estred" style="height:40px;width:auto;" />
         </a>
         <ul class="nav-links">
           <li><a href="#servicios">Servicios</a></li>
@@ -614,7 +750,7 @@
           <li><a href="#contacto">Contacto</a></li>
         </ul>
         <div class="nav-cta">
-          <a href="https://wa.me/59100000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios" target="_blank" class="btn btn-primary">Cotizar ahora</a>
+          <a href="https://wa.me/59171406557?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios" target="_blank" class="btn btn-primary">Cotizar ahora</a>
         </div>
         <button class="hamburger" id="hamburger" aria-label="Abrir menú">
           <span></span><span></span><span></span>
@@ -631,7 +767,7 @@
     <a href="#proceso" class="mobile-link">Proceso</a>
     <a href="#nosotros" class="mobile-link">Nosotros</a>
     <a href="#contacto" class="mobile-link">Contacto</a>
-    <a href="https://wa.me/59100000000" target="_blank" class="btn btn-primary">Cotizar ahora</a>
+    <a href="https://wa.me/59171406557" target="_blank" class="btn btn-primary">Cotizar ahora</a>
   </div>
 
   <!-- ═══════════════ HERO ═══════════════ -->
@@ -652,7 +788,7 @@
           </p>
           <div class="hero-actions">
             <a href="#servicios" class="btn btn-white">Ver planes y precios</a>
-            <a href="https://wa.me/59100000000?text=Hola%2C%20me%20interesa%20un%20proyecto%20web" target="_blank" class="btn btn-ghost">💬 Hablar por WhatsApp</a>
+            <a href="https://wa.me/59171406557?text=Hola%2C%20me%20interesa%20un%20proyecto%20web" target="_blank" class="btn btn-ghost">💬 Hablar por WhatsApp</a>
           </div>
           <div class="hero-stats">
             <div class="stat-item">
@@ -679,19 +815,19 @@
             </div>
             <div class="price-row">
               <span class="price-name">🏢 Web Empresarial</span>
-              <span class="price-val">800 Bs</span>
+              <span class="price-val">960 Bs</span>
             </div>
             <div class="price-row">
-              <span class="price-name">📦 Catálogo Web</span>
-              <span class="price-val">1.500 Bs</span>
+              <span class="price-name">📦 Catálogo Online</span>
+              <span class="price-val">2.880 Bs</span>
             </div>
             <div class="price-row">
               <span class="price-name">🛒 Tienda Online</span>
-              <span class="price-val">3.000 Bs</span>
+              <span class="price-val">4.800 Bs</span>
             </div>
             <div class="price-row">
-              <span class="price-name">💼 Sistema de Ventas</span>
-              <span class="price-val">3.500 Bs</span>
+              <span class="price-name">💼 Sistema Personalizado</span>
+              <span class="price-val">Cotización</span>
             </div>
           </div>
         </div>
@@ -775,7 +911,7 @@
             <li class="exclude-item">Panel de administración</li>
           </ul>
           <div class="plan-action">
-            <a href="https://wa.me/59100000000?text=Hola%2C%20quiero%20cotizar%20una%20Landing%20Page" target="_blank" class="plan-btn plan-btn-primary">Solicitar Landing Page</a>
+            <a href="https://wa.me/59171406557?text=Hola%2C%20quiero%20cotizar%20una%20Landing%20Page" target="_blank" class="plan-btn plan-btn-primary">Solicitar Landing Page</a>
           </div>
         </div>
 
@@ -785,7 +921,7 @@
           <div class="plan-icon">🏢</div>
           <div class="plan-name">Web Empresarial</div>
           <div class="plan-desc">La solución completa para tu empresa con presencia digital sólida.</div>
-          <div class="plan-price">800 Bs</div>
+          <div class="plan-price">960 Bs</div>
           <div class="plan-period">pago único · desde</div>
           <div class="divider"></div>
           <div class="include-title" style="color:#c4b5fd">Incluye</div>
@@ -807,16 +943,16 @@
             <li class="exclude-item">Sistema de usuarios</li>
           </ul>
           <div class="plan-action">
-            <a href="https://wa.me/59100000000?text=Hola%2C%20quiero%20cotizar%20una%20Web%20Empresarial" target="_blank" class="plan-btn plan-btn-white">Solicitar Web Empresarial</a>
+            <a href="https://wa.me/59171406557?text=Hola%2C%20quiero%20cotizar%20una%20Web%20Empresarial" target="_blank" class="plan-btn plan-btn-white">Solicitar Web Empresarial</a>
           </div>
         </div>
 
         <!-- Plan 3: Catálogo Web -->
         <div class="plan-card">
           <div class="plan-icon">📦</div>
-          <div class="plan-name">Catálogo Web</div>
+          <div class="plan-name">Catálogo Online</div>
           <div class="plan-desc">Muestra tus productos con fichas detalladas y cotización por WhatsApp.</div>
-          <div class="plan-price">1.500 Bs</div>
+          <div class="plan-price">2.880 Bs</div>
           <div class="plan-period">pago único · desde</div>
           <div class="divider"></div>
           <div class="include-title">Incluye</div>
@@ -838,7 +974,7 @@
             <li class="exclude-item">Control de inventario avanzado</li>
           </ul>
           <div class="plan-action">
-            <a href="https://wa.me/59100000000?text=Hola%2C%20quiero%20cotizar%20un%20Cat%C3%A1logo%20Web" target="_blank" class="plan-btn plan-btn-primary">Solicitar Catálogo Web</a>
+            <a href="https://wa.me/59171406557?text=Hola%2C%20quiero%20cotizar%20un%20Cat%C3%A1logo%20Web" target="_blank" class="plan-btn plan-btn-primary">Solicitar Catálogo Web</a>
           </div>
         </div>
 
@@ -847,7 +983,7 @@
           <div class="plan-icon">🛒</div>
           <div class="plan-name">Tienda Online</div>
           <div class="plan-desc">Vende en internet con carrito de compras, pagos y gestión de pedidos.</div>
-          <div class="plan-price">3.000 Bs</div>
+          <div class="plan-price">4.800 Bs</div>
           <div class="plan-period">pago único · desde</div>
           <div class="divider"></div>
           <div class="include-title">Incluye</div>
@@ -869,7 +1005,7 @@
             <li class="exclude-item">ERP completo</li>
           </ul>
           <div class="plan-action">
-            <a href="https://wa.me/59100000000?text=Hola%2C%20quiero%20cotizar%20una%20Tienda%20Online" target="_blank" class="plan-btn plan-btn-primary">Solicitar Tienda Online</a>
+            <a href="https://wa.me/59171406557?text=Hola%2C%20quiero%20cotizar%20una%20Tienda%20Online" target="_blank" class="plan-btn plan-btn-primary">Solicitar Tienda Online</a>
           </div>
         </div>
 
@@ -879,7 +1015,7 @@
             <div class="plan-icon" style="background:var(--purple-100)">💼</div>
             <div class="plan-name">Sistema de Ventas Web</div>
             <div class="plan-desc">Gestiona tu negocio completo desde el navegador: inventario, ventas, reportes y más.</div>
-            <div class="plan-price">3.500 Bs</div>
+            <div class="plan-price">Cotización</div>
             <div class="plan-period">pago único · desde</div>
             <div class="divider"></div>
             <div class="plan-ideal">
@@ -893,7 +1029,7 @@
               </ul>
             </div>
             <div class="plan-action">
-              <a href="https://wa.me/59100000000?text=Hola%2C%20quiero%20cotizar%20un%20Sistema%20de%20Ventas%20Web" target="_blank" class="plan-btn plan-btn-primary" style="max-width:280px">Solicitar Sistema de Ventas</a>
+              <a href="https://wa.me/59171406557?text=Hola%2C%20quiero%20cotizar%20un%20Sistema%20de%20Ventas%20Web" target="_blank" class="plan-btn plan-btn-primary" style="max-width:280px">Solicitar Sistema de Ventas</a>
             </div>
           </div>
           <div>
@@ -1107,7 +1243,7 @@
           <p>Contáctanos hoy y recibe una cotización gratuita sin compromiso.</p>
         </div>
         <div class="cta-actions">
-          <a href="https://wa.me/59100000000?text=Hola%2C%20quiero%20cotizar%20mi%20proyecto%20web" target="_blank" class="btn btn-white">💬 WhatsApp</a>
+          <a href="https://wa.me/59171406557?text=Hola%2C%20quiero%20cotizar%20mi%20proyecto%20web" target="_blank" class="btn btn-white">💬 WhatsApp</a>
           <a href="#contacto" class="btn btn-ghost">✉️ Escribirnos</a>
         </div>
       </div>
@@ -1131,7 +1267,7 @@
               <div class="contact-item-icon">💬</div>
               <div class="contact-item-text">
                 <strong>WhatsApp</strong>
-                <span>+591 0000-0000 · Respuesta inmediata</span>
+                <span>+591 71406557 · Respuesta inmediata</span>
               </div>
             </div>
             <div class="contact-item">
@@ -1179,10 +1315,10 @@
               <select class="form-select" id="plan" name="plan" required>
                 <option value="">Selecciona un plan...</option>
                 <option>Landing Page — 480 Bs</option>
-                <option>Web Empresarial — 800 Bs</option>
-                <option>Catálogo Web — 1.500 Bs</option>
-                <option>Tienda Online — 3.000 Bs</option>
-                <option>Sistema de Ventas — 3.500 Bs</option>
+                <option>Web Empresarial — 960 Bs</option>
+                <option>Catálogo Online — 2.880 Bs</option>
+                <option>Tienda Online — 4.800 Bs</option>
+                <option>Sistema Personalizado — Cotización</option>
                 <option>Solo un extra / servicio adicional</option>
                 <option>No sé aún, necesito asesoría</option>
               </select>
@@ -1241,7 +1377,7 @@
             <li><a href="#nosotros">Nosotros</a></li>
             <li><a href="#proceso">Proceso</a></li>
             <li><a href="#contacto">Contacto</a></li>
-            <li><a href="https://wa.me/59100000000" target="_blank">WhatsApp</a></li>
+            <li><a href="https://wa.me/59171406557" target="_blank">WhatsApp</a></li>
           </ul>
         </div>
       </div>
@@ -1253,7 +1389,7 @@
   </footer>
 
   <!-- ═══════════════ FLOATING BUTTONS ═══════════════ -->
-  <a href="https://wa.me/59100000000?text=Hola%2C%20me%20interesa%20su%20servicio%20de%20desarrollo%20web" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+  <a href="https://wa.me/59171406557?text=Hola%2C%20me%20interesa%20su%20servicio%20de%20desarrollo%20web" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
@@ -1264,59 +1400,126 @@
 
   <!-- ═══════════════ SCRIPTS ═══════════════ -->
   <script>
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-      document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
-    });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Mobile menu
-    const hamburger = document.getElementById('hamburger');
+    // ── Progress bar + Navbar scroll + Scroll-top ──
+    const navbar       = document.getElementById('navbar');
+    const scrollTopBtn = document.getElementById('scrollTop');
+    const progressBar  = document.getElementById('progressBar');
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      progressBar.style.width = (scrolled * 100) + '%';
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+      updateActiveNav();
+    }, { passive: true });
+
+    // ── Active nav section highlight ──
+    const sections  = ['inicio', 'servicios', 'extras', 'proceso', 'nosotros', 'contacto'];
+    const navLinks  = document.querySelectorAll('.nav-links a');
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 140) current = id;
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
+    }
+    updateActiveNav();
+
+    // ── Mobile menu ──
+    const hamburger  = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    const mobileClose = document.getElementById('mobileClose');
-    hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
-    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    const mobileClose= document.getElementById('mobileClose');
+    hamburger.addEventListener('click',  () => mobileMenu.classList.add('open'));
+    mobileClose.addEventListener('click',() => mobileMenu.classList.remove('open'));
     document.querySelectorAll('.mobile-link').forEach(link => {
       link.addEventListener('click', () => mobileMenu.classList.remove('open'));
     });
 
-    // Contact form
+    // ── Stats counter animation ──
+    function animateCounter(el) {
+      const raw    = el.textContent.trim();
+      const num    = parseFloat(raw);
+      if (isNaN(num)) return;
+      const suffix = raw.replace(/[\d.]/g, '');
+      const isInt  = Number.isInteger(num);
+      const dur    = 1200;
+      const t0     = performance.now();
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 3);
+        el.textContent = (isInt ? Math.round(e * num) : (e * num).toFixed(1)) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = raw;
+      })(t0);
+    }
+
+    if (!prefersReducedMotion) {
+      const statsObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.querySelectorAll('.stat-number').forEach(animateCounter), 620);
+            statsObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      const heroStats = document.querySelector('.hero-stats');
+      if (heroStats) statsObs.observe(heroStats);
+    }
+
+    // ── Contact form ──
     function handleSubmit(e) {
       e.preventDefault();
-      const form = document.getElementById('contactForm');
-      const nombre = form.nombre.value.trim();
+      const form     = document.getElementById('contactForm');
+      const nombre   = form.nombre.value.trim();
       const telefono = form.telefono.value.trim();
-      const plan = form.plan.value;
-      const mensaje = form.mensaje.value.trim();
+      const plan     = form.plan.value;
+      const mensaje  = form.mensaje.value.trim();
       const text = encodeURIComponent(
         `Hola, soy ${nombre}.\n` +
         `Teléfono: ${telefono}\n` +
         `Plan de interés: ${plan}\n` +
         (mensaje ? `Mensaje: ${mensaje}` : '')
       );
-      window.open(`https://wa.me/59100000000?text=${text}`, '_blank');
+      window.open(`https://wa.me/59171406557?text=${text}`, '_blank');
       document.getElementById('formSuccess').style.display = 'block';
       form.reset();
       setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
     }
 
-    // Intersection Observer animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
+    // ── Staggered scroll-in animations ──
+    if (!prefersReducedMotion) {
+      const animObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('anim-hidden');
+            entry.target.classList.add('anim-in');
+            animObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.plan-card, .why-card, .process-step, .feature-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = 'opacity .5s ease, transform .5s ease';
-      observer.observe(el);
-    });
+      // Stagger siblings inside each container
+      ['.plans-grid', '.why-grid', '.process-steps', '.features-grid'].forEach(sel => {
+        const container = document.querySelector(sel);
+        if (!container) return;
+        Array.from(container.children).forEach((el, i) => {
+          el.style.setProperty('--stagger', i);
+          el.classList.add('anim-hidden');
+          animObs.observe(el);
+        });
+      });
+
+      // Section headers slide in
+      document.querySelectorAll('.section > .container > .text-center, .section-alt > .container > .text-center').forEach(el => {
+        el.classList.add('anim-hidden');
+        animObs.observe(el);
+      });
+    }
   </script>
 </body>
 </html>
