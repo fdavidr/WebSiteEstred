@@ -730,6 +730,45 @@
     /* ── Extras table row transition ── */
     .extras-table tbody tr { transition: background var(--transition); }
 
+    /* ── Promo plan card ── */
+    .plan-card.promo {
+      background: linear-gradient(150deg, #1a0540, #3b0f8c);
+      border: 1px solid rgba(245,158,11,.4);
+      box-shadow: 0 0 0 1px rgba(245,158,11,.12), 0 20px 60px rgba(80,20,180,.35);
+      color: white;
+    }
+    .plan-card.promo .plan-name { color: white; }
+    .plan-card.promo .plan-desc,
+    .plan-card.promo .plan-period { color: var(--purple-300); }
+    .plan-card.promo .include-item { color: white; }
+    .plan-card.promo .exclude-item { color: var(--purple-300); }
+    .plan-card.promo .divider { background: rgba(255,255,255,.12); }
+    .plan-card.promo .plan-ideal { background: rgba(255,255,255,.07); }
+    .plan-price-original {
+      font-size: .95rem; text-decoration: line-through; color: var(--purple-300);
+      font-weight: 600; margin-bottom: 2px; display: block;
+    }
+    .plan-price-promo {
+      font-size: 2.6rem; font-weight: 900; color: #fcd34d;
+      line-height: 1; margin-bottom: 4px;
+    }
+    .promo-deadline {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(245,158,11,.18); color: #fcd34d;
+      border: 1px solid rgba(245,158,11,.4);
+      font-size: .78rem; font-weight: 700; padding: 5px 12px; border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .promo-features-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .promo-feature-group { margin-bottom: 12px; }
+    .promo-feature-group-title {
+      font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: #fcd34d; margin-bottom: 8px;
+    }
+    @media (max-width: 768px) { .promo-features-grid { grid-template-columns: 1fr; } }
+
     /* ── Respect reduced motion ── */
     @media (prefers-reduced-motion: reduce) {
       .hero-eyebrow, .hero-title, .hero-description,
@@ -827,7 +866,11 @@
               <span class="price-val">960 Bs</span>
             </div>
             <div class="price-row">
-              <span class="price-name">📦 Catálogo Online</span>
+              <span class="price-name">� Ventas Profesional</span>
+              <span class="price-val" style="color:#fcd34d">1.000 Bs 🔥</span>
+            </div>
+            <div class="price-row">
+              <span class="price-name">�📦 Catálogo Online</span>
               <span class="price-val">2.880 Bs</span>
             </div>
             <div class="price-row">
@@ -1069,6 +1112,114 @@
                   <li class="exclude-item">Integraciones bancarias</li>
                   <li class="exclude-item">Funciones fuera del alcance contratado</li>
                 </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plan 6: Sistema de Ventas Profesional -->
+        <div class="plan-card plan-wide promo">
+          <div class="plan-tag" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">🔥 Oferta</div>
+          <div>
+            <div class="plan-icon" style="background:rgba(245,158,11,.18)">💻</div>
+            <div class="plan-name">Sistema de Ventas Profesional</div>
+            <div class="plan-desc">Sistema local para PYMEs. Control total de tu negocio sin internet, sin mensualidades, licencia permanente.</div>
+            <span class="plan-price-original">Precio regular: 1.400 Bs</span>
+            <div class="plan-price-promo">1.000 Bs</div>
+            <div class="plan-period">licencia permanente · 1 PC · instalación incluida</div>
+            <div class="promo-deadline">⏳ Oferta válida hasta el 30 de julio</div>
+            <div class="divider"></div>
+            <div class="plan-ideal">
+              <div class="plan-ideal-title" style="color:#fcd34d">💡 Ideal para</div>
+              <ul class="plan-ideal-list" style="list-style:none;display:flex;flex-wrap:wrap;gap:8px;">
+                <li style="background:rgba(245,158,11,.2);border-radius:100px;padding:4px 12px;font-size:.8rem;color:#fcd34d;font-weight:600">Tiendas</li>
+                <li style="background:rgba(245,158,11,.2);border-radius:100px;padding:4px 12px;font-size:.8rem;color:#fcd34d;font-weight:600">Importadoras</li>
+                <li style="background:rgba(245,158,11,.2);border-radius:100px;padding:4px 12px;font-size:.8rem;color:#fcd34d;font-weight:600">Distribuidoras</li>
+                <li style="background:rgba(245,158,11,.2);border-radius:100px;padding:4px 12px;font-size:.8rem;color:#fcd34d;font-weight:600">Ferreterías</li>
+                <li style="background:rgba(245,158,11,.2);border-radius:100px;padding:4px 12px;font-size:.8rem;color:#fcd34d;font-weight:600">Negocios minoristas</li>
+                <li style="background:rgba(245,158,11,.2);border-radius:100px;padding:4px 12px;font-size:.8rem;color:#fcd34d;font-weight:600">Servicios</li>
+              </ul>
+            </div>
+            <div class="plan-action">
+              <a href="https://wa.me/59171406557?text=Hola%2C%20quiero%20adquirir%20el%20Sistema%20de%20Ventas%20Profesional%20a%201.000%20Bs" target="_blank" class="plan-btn" style="max-width:300px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;box-shadow:0 4px 20px rgba(245,158,11,.4);">🔥 Obtener por 1.000 Bs</a>
+            </div>
+          </div>
+          <div>
+            <div class="promo-features-grid">
+              <div>
+                <div class="promo-feature-group">
+                  <div class="promo-feature-group-title">👥 Gestión de Usuarios</div>
+                  <ul class="include-list">
+                    <li class="include-item">Inicio de sesión seguro</li>
+                    <li class="include-item">Roles: Administrador y Vendedor</li>
+                    <li class="include-item">Control de acceso por permisos</li>
+                  </ul>
+                </div>
+                <div class="promo-feature-group">
+                  <div class="promo-feature-group-title">📋 Gestión Comercial</div>
+                  <ul class="include-list">
+                    <li class="include-item">Registro de clientes y vendedores</li>
+                    <li class="include-item">Administración de productos</li>
+                    <li class="include-item">Cotizaciones profesionales</li>
+                    <li class="include-item">Notas de venta y entrega</li>
+                    <li class="include-item">Aplicación de descuentos</li>
+                  </ul>
+                </div>
+                <div class="promo-feature-group">
+                  <div class="promo-feature-group-title">📄 Documentos Profesionales</div>
+                  <ul class="include-list">
+                    <li class="include-item">Generación automática de PDF</li>
+                    <li class="include-item">Impresión de cotizaciones</li>
+                    <li class="include-item">Impresión de notas de venta</li>
+                    <li class="include-item">Edición de documentos</li>
+                  </ul>
+                </div>
+              </div>
+              <div>
+                <div class="promo-feature-group">
+                  <div class="promo-feature-group-title">💰 Control Financiero</div>
+                  <ul class="include-list">
+                    <li class="include-item">Registro de gastos</li>
+                    <li class="include-item">Historial de operaciones</li>
+                    <li class="include-item">Consulta de movimientos</li>
+                  </ul>
+                </div>
+                <div class="promo-feature-group">
+                  <div class="promo-feature-group-title">📊 Estadísticas y Reportes</div>
+                  <ul class="include-list">
+                    <li class="include-item">Ventas por período</li>
+                    <li class="include-item">Productos más vendidos</li>
+                    <li class="include-item">Resumen de ingresos</li>
+                    <li class="include-item">Indicadores para decisiones</li>
+                  </ul>
+                </div>
+                <div class="promo-feature-group">
+                  <div class="promo-feature-group-title">📦 Inventario</div>
+                  <ul class="include-list">
+                    <li class="include-item">Registro de productos</li>
+                    <li class="include-item">Control de existencias</li>
+                    <li class="include-item">Actualización rápida</li>
+                  </ul>
+                </div>
+                <div class="promo-feature-group">
+                  <div class="promo-feature-group-title">💻 Funcionamiento</div>
+                  <ul class="include-list">
+                    <li class="include-item">Interfaz moderna en el navegador</li>
+                    <li class="include-item">Instalación local en tu PC</li>
+                    <li class="include-item">100% offline · sin internet</li>
+                    <li class="include-item">Datos almacenados localmente</li>
+                  </ul>
+                </div>
+                <div class="promo-feature-group">
+                  <div class="promo-feature-group-title" style="color:var(--purple-300)">No incluye</div>
+                  <ul class="exclude-list">
+                    <li class="exclude-item">Facturación electrónica SIN</li>
+                    <li class="exclude-item">Multiusuario en red local</li>
+                    <li class="exclude-item">Sincronización entre PCs</li>
+                    <li class="exclude-item">Aplicación móvil</li>
+                    <li class="exclude-item">Acceso desde Internet</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -1324,6 +1475,7 @@
               <select class="form-select" id="plan" name="plan" required>
                 <option value="">Selecciona un plan...</option>
                 <option>Landing Page — 480 Bs</option>
+                <option>Sistema de Ventas Profesional — 1.000 Bs 🔥</option>
                 <option>Web Empresarial — 960 Bs</option>
                 <option>Catálogo Online — 2.880 Bs</option>
                 <option>Tienda Online — 4.800 Bs</option>
@@ -1370,7 +1522,8 @@
             <li><a href="#servicios">Web Empresarial</a></li>
             <li><a href="#servicios">Catálogo Web</a></li>
             <li><a href="#servicios">Tienda Online</a></li>
-            <li><a href="#servicios">Sistema de Ventas</a></li>
+            <li><a href="#servicios">Sistema de Ventas Web</a></li>
+            <li><a href="#servicios">Sistema Ventas Pro 🔥</a></li>
           </ul>
         </div>
         <div class="footer-col">
